@@ -23,31 +23,6 @@ window.addEventListener('DOMContentLoaded', ()=> {
     let slideIndex = 1,
         dots = [];
 
-    const swipe = new Hammer(slideField);
-
-    swipe.on("swipeleft", function(ev) {
-            showSlide(slideIndex);
-            dotsActiveAdd();
-
-            if (slideIndex === 2) {
-                slideIndex = 0;
-            } else {
-                slideIndex++;
-            }
-    });
-    swipe.on("swiperight", function(ev) {
-            showSlide(slideIndex);
-
-            dotsActiveAdd();
-
-            if (slideIndex === 0) {
-                slideIndex = 2;
-            } else {
-                slideIndex--;
-            }
-        
-    });
-
     function showSlide(i) {
         slides.forEach(slide => {
             slide.classList.remove('carousel__img_active');
