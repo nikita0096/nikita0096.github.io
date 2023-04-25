@@ -80,7 +80,6 @@ window.addEventListener('scroll', scroleCgangeColor);
     
 /////theme 
 const activeTheme = localStorage.getItem('theme');
-console.log(activeTheme);
 
 if (activeTheme === null) {
     localStorage.setItem('theme', 'light');
@@ -107,3 +106,40 @@ function changeThemeMode () {
 
 changeThemeMode();
 
+////animation 
+
+const animItems = document.querySelectorAll('.anim-item');
+
+if (animItems.length > 0) {
+    window.addEventListener('scroll', animOnScroll);
+    function animOnScroll() {
+        animItems.forEach(item => {
+            const animItemHight = item.offsetHeight;
+            const animItemOffset = offset(item).top;
+            const animStart = 4;
+
+            let animItemPoint = window.innerHeight - animItemHight / animStart;
+
+            if (animItemHight > window.innerHeight) {
+                animItemPoint = window.innerHeight - window.innerHeight / animStart;
+            }
+
+            if((window.pageYOffset > animItemOffset - animItemPoint) && window.pageYOffset < (animItemOffset + animItemHight)) {
+                item.classList.add('_active');
+            } else {
+                if (!item.classList.contains('anim-no-active')) {
+                    item.classList.remove('_active')
+                }
+            }
+        })
+    }
+
+    function offset(el) {
+        const rect = el.getBoundingClientRect(),
+            scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        return { top: rect.top + scrollTop, left: rect.left + scrollLeft}
+    }
+    
+    setTimeout(animOnScroll, 300)
+}
