@@ -143,3 +143,23 @@ if (animItems.length > 0) {
     
     setTimeout(animOnScroll, 300)
 }
+
+
+///
+
+const itemSlide = document.querySelectorAll('.usage__item');
+
+const hideSlide = () => {
+    itemSlide.forEach(item => item.classList.remove('usage__item-active'));
+}
+
+const showSlide = (i) => {
+    itemSlide[i].classList.add('usage__item-active');
+}
+
+itemSlide.forEach((item, i) => {
+    item.addEventListener('click' , ()=> {
+        hideSlide();
+        showSlide(i);
+    })
+})
